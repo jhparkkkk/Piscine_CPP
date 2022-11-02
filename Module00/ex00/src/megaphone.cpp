@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 14:33:09 by jeepark           #+#    #+#             */
-/*   Updated: 2022/10/31 16:18:21 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:06:14 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 int main(int ac, char **av)
 {
     if (ac < 2)
@@ -23,7 +25,7 @@ int main(int ac, char **av)
     {
         std::string str=av[i];
         std::transform(str.begin(), str.end(),str.begin(), ::toupper);
-        std::cout << ""<< str <<" ";
+        std::cout << ""<< str <<"";
     }
     std::cout << std::endl;
     return (EXIT_SUCCESS);
