@@ -6,7 +6,7 @@ RM 			= 	rm -f
 
 INC			=	-I include
 
-CFLAGS		=	-Wall -Wextra - -std=c++98
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 
 LFLAGS		=	-I./phonebook 
 
