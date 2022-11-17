@@ -1,32 +1,20 @@
+NAME	=	megaphone
 
-NAME	= megaphone
+CC		=	clang++
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98
+RM		=	rm -rf
 
+SRCS	=	Megaphone.cpp
 
-CC            := clang++
-CFLAGS        := -Wall -Wextra -Werror -std=c++98
+OBJS	=	$(SRCS:.cpp=.o)
 
-SRCS_PATH	:=	src
-OBJS_PATH	:=	obj
+all: $(NAME)
 
-SRCS     	+=	megaphone.cpp
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-SRCS          := $(SRCS:%=$(SRCS_PATH)/%)
-
-OBJS          := $(SRCS:$(SRCS_PATH)/%.c=$(OBJS_PATH)/%.o)
-
-RM            := rm -f
-
-$(NAME): $(OBJS) $(LIBFT_PATH)$(LIBFT_A) $(MLX_PATH)$(MLX_A)
-	$(CC) $(OBJS) $(LFLAGS) $(OUTPUT_OPTION) 
-	echo "CREATED $(NAME)"
-
-all:          $(NAME)
-
-$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c 
-	@ mkdir -p $(@D)
-	$(CC) $(CFLAGS) $< $(OUTPUT_OPTION) $(INC) 
-	echo "CREATED $@"
-
+%.o: %.cpp
+	   $(CC) $(CFLAGS) -c $< $(OUTPUT_OPTION)
 clean:
 	$(RM) $(OBJS)
 
@@ -35,8 +23,4 @@ fclean: clean
 
 re: fclean all
 
-# info:
-# 	make --dry-run --always-make --no-print-directory | grep -v "echo \| mkdir"
-
-# .SILENT:
-.PHONY:    all clean fclean re 
+.PHONY:		all clean fclean re 
