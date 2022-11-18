@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:15:04 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/16 18:33:47 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/18 13:22:01 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ class Fixed {
 
         static const Fixed & min(Fixed &a, Fixed &b) ;
         static const Fixed & max(Fixed &a, Fixed &b) ;
-
+        static const Fixed & min(Fixed const &a, Fixed const &b) ;
         static const Fixed & max(Fixed const &a, Fixed const &b) ;
         
 

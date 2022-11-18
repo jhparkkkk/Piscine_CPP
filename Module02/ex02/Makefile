@@ -1,11 +1,11 @@
+NAME	=	a.out
+
 CC		=	clang++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM		=	rm -rf
 
-NAME	=	a.out	
-
-SRCS	=	main.cpp \
-			Fixed.cpp 
+SRCS	=	Fixed.cpp \
+			main.cpp
 
 OBJS	=	$(SRCS:.cpp=.o)
 
@@ -14,9 +14,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-.cpp.o: $(SRCS)
-	$(CC) $(CFLAGS) -c $< -o $@
-
+%.o: %.cpp
+	   $(CC) $(CFLAGS) -c $< $(OUTPUT_OPTION)
 clean:
 	$(RM) $(OBJS)
 

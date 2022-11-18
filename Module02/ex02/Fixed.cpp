@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:17:48 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/16 18:33:45 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/18 14:56:25 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ Fixed Fixed::operator*(Fixed const & rhs) const
 
 Fixed Fixed::operator/(Fixed const & rhs) const
 {
+    if (rhs.toFloat() == 0)
+        std::cout << "division by zero is undefined" << std::endl;
     return (Fixed(Fixed::toFloat() / rhs.toFloat() ));
 }
 
@@ -183,6 +185,14 @@ const Fixed & Fixed::max(Fixed &a, Fixed &b)
         return a;
     return b;
 }
+
+const Fixed & Fixed::min(Fixed const &a, Fixed const &b)
+{
+    if (a < b)
+        return a;
+    return b;
+}
+
 
 const Fixed & Fixed::max(Fixed const &a, Fixed const &b)
 {
