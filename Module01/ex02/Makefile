@@ -2,18 +2,18 @@ CC		=	clang++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -g3
 RM		=	rm -rf
 
-NAME	=	sed
+NAME	=	brain
 
 SRCS	=	main.cpp \
-			FileOpener.cpp \
-			ReplaceWord.cpp 
+
 
 OBJS	=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ 
+	$(CC) $(CFLAGS) $(OBJS) -o $@
+
 .cpp.o: $(SRCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -6,13 +6,13 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:38:30 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/14 15:40:13 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:55:58 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie( std::string name ) : _name(name)
+Zombie::Zombie( void ) : _name("default")
 {
     std::cout << "Zombie " << this->_name << " created" << std::endl;
     return ;
@@ -22,6 +22,13 @@ Zombie::~Zombie( void )
 {
     std::cout << "Zombie " << this->_name << " destroyed" << std::endl;
     return ;
+}
+
+void    Zombie::setName(std::string name) { _name = name;}
+
+std::string Zombie::getName() const
+{
+    return _name;
 }
 
 void    Zombie::announce( void ) const

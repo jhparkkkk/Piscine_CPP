@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:53:27 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/12 18:22:59 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/19 16:00:27 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ class HumanB {
         void    attack( void );
         void    setWeapon(Weapon& weapon);
 
-
     private:
         std::string _name;
         Weapon* _Weapon;
-    
 };
 
 

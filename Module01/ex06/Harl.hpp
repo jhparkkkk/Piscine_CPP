@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 11:49:52 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/19 16:00:05 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/13 18:54:28 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/14 12:54:34 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
-#ifndef HUMAN_A_H
-# define HUMAN_A_H
-
+#pragma once
+#ifndef HARL_H
+ #define HARL_H
 #include <iostream>
-#include <string>
-#include "Weapon.hpp"
-
-class HumanA {
+#include <fstream>
+#define NB_COMPLAIN 4
+class Harl {
     public:
-        HumanA( std::string name, Weapon& _weapon );
-        ~HumanA( void );
-        
-        void    attack( void );
+        Harl( void );
+        ~Harl( void );
 
+		void	complain(std::string level);
+	
     private:
-        std::string _name;
-        Weapon& _Weapon;    
+    	void	debug( void );
+		void	info( void );
+		void	warning( void );
+		void	error( void );
+    
 };
+
 
 #endif 

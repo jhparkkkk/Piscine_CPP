@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:59:24 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/13 18:50:52 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/19 18:42:58 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ std::string ReplaceWord::getS2( void )
 
 void    ReplaceWord::textEdit(void)
 {
-
+    std::cout <<std::endl <<  "text Edit" << std::endl;
     std::string old_s = getS1();
     std::string new_s = getS2();
     std::string file_out_name = getFileIn() + ".replace";
@@ -56,19 +56,50 @@ void    ReplaceWord::textEdit(void)
     
     // check if file is empty
     int c = file_in.peek();  // peek character
-    if ( c != EOF )
+    if ( c == EOF )
     {
-        while(!file_in.eof())
+        std::cout << "File is empty" << std::endl;
+        return ;
+    }
+    while(!file_in.eof())
+    {
+        
+        std::getline(file_in, buffer); 
+        while(1)    
         {
-            std::getline(file_in, buffer); 
-            while((key = buffer.find(old_s)) != std::string::npos)    
+            key = buffer.find(old_s, key);
+            std::cout << "buf: " << buffer << std::endl;
+            std::cout << "key: " << key << std::endl;
+            std::cout << "key + old_s : " << key + old_s.size() << std::endl;
+            if (key == std::string::npos)
+                break;
+            if (buffer[key + old_s.size()] != '\0' && isspace(buffer[key + old_s.size()]) == 0)
             {
+                while (isspace(buffer[key]) == 0)
+                {
+                    if (key == std::string::npos)
+                        break;
+                    key++;
+                    key = buffer.find(old_s, key);
+                    
+                    if (isspace(buffer[key + old_s.size()]) != 0)
+                    {
+                        break ;                    
+                    }
 
+
+                }
+            }
+            // }
+            else
+            {
                 buffer.erase(key, old_s.size());
                 buffer.insert(key, new_s);
+                key += new_s.size();
             }
-            file_out << buffer << std::endl;
         }
+        file_out << buffer << std::endl;
+        key = 0;
     }
     file_in.close();
     file_out.close();

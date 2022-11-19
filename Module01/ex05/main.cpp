@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 11:49:52 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/19 16:00:05 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/14 11:15:19 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/14 12:56:03 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
-#ifndef HUMAN_A_H
-# define HUMAN_A_H
+#include "Harl.hpp"
 
-#include <iostream>
-#include <string>
-#include "Weapon.hpp"
+int main ()
+{
+    Harl harl = Harl();
+    
+    harl.complain("DEBUG");
+    harl.complain("INFO");
+    harl.complain("WARNING");
+    harl.complain("ERROR");
 
-class HumanA {
-    public:
-        HumanA( std::string name, Weapon& _weapon );
-        ~HumanA( void );
-        
-        void    attack( void );
+    harl.complain("RANDOM");
 
-    private:
-        std::string _name;
-        Weapon& _Weapon;    
-};
-
-#endif 
+    return 0;
+}

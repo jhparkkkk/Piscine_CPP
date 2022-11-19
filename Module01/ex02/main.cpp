@@ -5,28 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:39:55 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/14 15:39:43 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/11 18:31:18 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/11 19:10:31 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include <string>
 
-int main ()
+int main()
 {
-    /* zombie allocated on the stack */
-    Zombie zombie = Zombie("jee");
-    zombie.announce();
-
-    /* zombie allocated on the heap */ 
-    Zombie* zombieP = newZombie("jo");
-    zombieP->announce();
-
-    /* zombie allocated on the stack locally 
-        inside function */
-    randomChump("kiki");
+    std::string brain = "HI THIS IS BRAIN";
+    std::string* stringPTR = &brain;
+    std::string& stringREF = brain;
     
-    /* free Jo from the heap */
-    delete zombieP;
+    /* display string address*/
+    std::cout << "Memory address:" << std::endl;
+    std::cout << &brain << std::endl;
+    std::cout << stringPTR << std::endl;
+    std::cout << &stringREF << std::endl;
+        
+    
+    /* display string value */
+    std::cout << std::endl << "Value:" << std::endl;
+    std::cout << brain << std::endl;
+    std::cout << *stringPTR << std::endl;
+    std::cout << stringREF << std::endl;
+    
     return 0;
 }

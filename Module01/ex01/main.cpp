@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 11:49:52 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/19 16:00:05 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/11 16:39:55 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/11 18:25:54 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
-#ifndef HUMAN_A_H
-# define HUMAN_A_H
+#include "Zombie.hpp"
 
-#include <iostream>
-#include <string>
-#include "Weapon.hpp"
+int main ()
+{
+    /* zombie allocated on the stack */
+    Zombie zombie = Zombie();
+    zombie.announce();
 
-class HumanA {
-    public:
-        HumanA( std::string name, Weapon& _weapon );
-        ~HumanA( void );
+    /* zombie allocated on the heap */
+    int nb_zombie = 5;
+    Zombie* horde = zombieHorde(nb_zombie, "minions");
+    
+    for (int i = 0; i < nb_zombie; i++)
+        horde[i].announce();
         
-        void    attack( void );
-
-    private:
-        std::string _name;
-        Weapon& _Weapon;    
-};
-
-#endif 
+    delete [] horde;
+    
+    return 0;
+}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fileOpener.cpp                                     :+:      :+:    :+:   */
+/*   FileOpener.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:22:09 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/13 18:51:27 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/19 16:06:36 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include <fstream>
 
 FileOpener::FileOpener( void )
 {
@@ -73,7 +73,7 @@ bool    FileOpener::checkFile(int ac, char **av)
         return false;
     setFilename(av[1]);   
      
-    std::ifstream file_in = std::ifstream(_fileName);
+    std::ifstream file_in = std::ifstream(this->_fileName, std::ios_base::in);
     if (!file_in.is_open())
         return false;
     const char * name = _fileName.c_str();

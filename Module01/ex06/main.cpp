@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 11:49:52 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/19 16:00:05 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/14 11:15:19 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/14 14:52:19 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
-#ifndef HUMAN_A_H
-# define HUMAN_A_H
+#include "Harl.hpp"
 
-#include <iostream>
-#include <string>
-#include "Weapon.hpp"
+int main (int ac, char **av)
+{
+    Harl harl = Harl();
+    
+    if (ac != 2)
+    {
+        std::cout << "Invalid argument: ./halFilter <complain>" << std::endl;
+        return(EXIT_FAILURE);
+    }
 
-class HumanA {
-    public:
-        HumanA( std::string name, Weapon& _weapon );
-        ~HumanA( void );
-        
-        void    attack( void );
+    harl.complain(av[1]);    
 
-    private:
-        std::string _name;
-        Weapon& _Weapon;    
-};
 
-#endif 
+    return(EXIT_SUCCESS);
+}
