@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:59:24 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/19 18:42:58 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/20 10:59:01 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,19 @@ void    ReplaceWord::textEdit(void)
         {
             key = buffer.find(old_s, key);
             std::cout << "buf: " << buffer << std::endl;
-            std::cout << "key: " << key << std::endl;
-            std::cout << "key + old_s : " << key + old_s.size() << std::endl;
+            // std::cout << "key: " << key << std::endl;
+            // std::cout << "key + old_s : " << key + old_s.size() << std::endl;
             if (key == std::string::npos)
                 break;
-            if (buffer[key + old_s.size()] != '\0' && isspace(buffer[key + old_s.size()]) == 0)
+            // si pplop
+            if (key && isspace(buffer[key - 1]) == 0)
+            {
+                while (isspace(buffer[key]) == 0)
+                    key++;
+                key = buffer.find(old_s, key);
+            }           
+            // si je ne suis pas a la fin de la ligne et si plopp
+            else if (buffer[key + old_s.size()] != '\0' && isspace(buffer[key + old_s.size()]) == 0)
             {
                 while (isspace(buffer[key]) == 0)
                 {
@@ -81,16 +89,26 @@ void    ReplaceWord::textEdit(void)
                         break;
                     key++;
                     key = buffer.find(old_s, key);
-                    
+                    std::cout << buffer[key] <<std::endl;
+                        std::cout << buffer[key+1] <<std::endl;
+                        std::cout << buffer[key+2] <<std::endl;
+                        std::cout << buffer[key+3] <<std::endl;
                     if (isspace(buffer[key + old_s.size()]) != 0)
                     {
+                        std::cout << "ici" << std::endl;
+                        // std::cout << buffer[key -1] <<std::endl;
+
+                        // std::cout << buffer[key] <<std::endl;
+                        // std::cout << buffer[key+1] <<std::endl;
+                        // std::cout << buffer[key+2] <<std::endl;
+                        // std::cout << buffer[key+3] <<std::endl;
+
                         break ;                    
                     }
 
 
                 }
             }
-            // }
             else
             {
                 buffer.erase(key, old_s.size());
