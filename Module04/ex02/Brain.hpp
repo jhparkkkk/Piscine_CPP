@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 17:21:41 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 10:46:34 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/23 10:54:50 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/23 13:32:11 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once 
-#ifndef SCAVTRAP_HPP
- #define SCAVTRAP_HPP
+#include <iostream>
 
-#include "ClapTrap.hpp"
-
-class ScavTrap : public ClapTrap
+class Brain
 {
     public:
-        ScavTrap( void );
-        ScavTrap( std::string name);
-        ScavTrap(ScavTrap const &);
-        ScavTrap& operator=(ScavTrap const &);
-        ~ScavTrap();
-        
-        void    guardGate();
-		void    attack(const std::string & target);
-};
+        Brain( void );
+        Brain(Brain const &);
+        Brain& operator=(Brain const &);
+        ~Brain();
 
-#endif
+        void        setIdeas(std::string);
+        void        displayIdeas() const;
+    private:
+        std::string _ideas[100];
+
+};

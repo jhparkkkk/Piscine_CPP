@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 17:21:41 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 10:46:34 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/23 10:45:57 by jeepark           #+#    #+#             */
+/*   Updated: 2022/11/23 14:42:25 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once 
-#ifndef SCAVTRAP_HPP
- #define SCAVTRAP_HPP
 
-#include "ClapTrap.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class ScavTrap : public ClapTrap
+class Cat : public Animal
 {
     public:
-        ScavTrap( void );
-        ScavTrap( std::string name);
-        ScavTrap(ScavTrap const &);
-        ScavTrap& operator=(ScavTrap const &);
-        ~ScavTrap();
-        
-        void    guardGate();
-		void    attack(const std::string & target);
-};
+        Cat( void );
+        Cat(Cat const &);
+        Cat& operator=(Cat const &);
+        ~Cat();
 
-#endif
+        void	makeSound() const;
+        void	displayIdeas() const;
+        void	setType(std::string);
+		void	setIdeas(std::string idea);
+
+    private:
+        Brain* _brain;
+};
