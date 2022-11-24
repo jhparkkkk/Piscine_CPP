@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 17:14:22 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/24 10:49:49 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/24 18:39:51 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & rhs)
 MateriaSource::~MateriaSource( void )
 {
     std::cout << "MateriaSource destroyed" << std::endl;
+    for(int i = 0; i < 4; i++)
+        if (_materia[i])
+            delete _materia[i];
     return ;
 }
 
@@ -54,13 +57,10 @@ MateriaSource::~MateriaSource( void )
 */
 void		MateriaSource::learnMateria(AMateria* materia)
 {
-    std::cout << "------learnMateria member function--------" << std::endl;
     for(int i = 0; i < 4; i++)
     {
-        std::cout << i << std::endl;
         if (!_materia[i])
         {
-            std::cout << "materia stored" << std::endl;
             _materia[i] = materia;
             _nbMateria++;
             return;
@@ -77,14 +77,11 @@ void		MateriaSource::learnMateria(AMateria* materia)
 */
 AMateria*	MateriaSource::createMateria(std::string const & type)
 {
-    std::cout << "******createMateria member function******" << std::endl;
-    std::cout << type << std::endl;
     AMateria* new_materia = NULL;
     for(int i = 0; i < _nbMateria; i++)
     {
         if (_materia[i]->getType() == type)
         {
-            std::cout << "FOUND " << type << "at :" << i << std::endl;
             new_materia = _materia[i];
             return new_materia;
         }

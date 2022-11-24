@@ -6,13 +6,14 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:36:47 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/24 15:01:18 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/24 17:45:46 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #ifndef CHARACTER_HPP
  #define CHARACTER_HPP
+
 #include "ICharacter.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
@@ -31,12 +32,13 @@ class   Character: public ICharacter
         void				equip(AMateria* m);
         void				unequip(int idx);
         void				use(int idx, ICharacter& target);
+        // void                emptyTrash(void);
     private:
         std::string	_name;
 		AMateria*   _slot[4];
-		// AMateria*	_trash;
+		AMateria**	_trash;
 		int			_nbSlot;
-		
+		int         _nbTrash;
 };
 
 #endif
