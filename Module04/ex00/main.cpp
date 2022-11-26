@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:29:45 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 12:21:11 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:15:32 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <iostream> 
 
 /*
-    keyword "virtual" converts static function function into dynamic function call.
+    keyword "virtual" converts static function into dynamic function call.
     Virtual member function == method
     even if I instanciate a cat with class Cat but with type Animal (inherited)
     Cat will behave like a cat. 

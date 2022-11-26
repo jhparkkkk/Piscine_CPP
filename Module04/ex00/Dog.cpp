@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:55:07 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 11:02:15 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:18:33 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-Dog::Dog( void )
+Dog::Dog()
 {
     std::cout << "Dog created" << std::endl;
     this->_type = "dog";
@@ -35,7 +35,7 @@ Dog & Dog::operator=(Dog const & rhs)
     return  *this;
 }
 
-Dog::~Dog( void )
+Dog::~Dog()
 {
     std::cout << "Dog destroyed" << std::endl;
     return ;

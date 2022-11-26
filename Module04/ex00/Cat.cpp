@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:53:30 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 10:56:32 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:18:17 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-Cat::Cat( void )
+Cat::Cat()
 {
     std::cout << "Cat created" << std::endl;
     this->_type = "cat";
     return;
 }
 
-Cat::Cat( Cat const & src)
+Cat::Cat(Cat const & src)
 {
     std::cout << "Cat Copy constructor called" << std::endl;
     *this = src;
@@ -35,7 +35,7 @@ Cat & Cat::operator=(Cat const & rhs)
     return  *this;
 }
 
-Cat::~Cat( void )
+Cat::~Cat()
 {
     std::cout << "Cat destroyed" << std::endl;
     return ;

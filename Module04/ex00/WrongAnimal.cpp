@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:37:03 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 11:23:15 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:18:53 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-WrongAnimal::WrongAnimal( void ) : _type("unknown")
+WrongAnimal::WrongAnimal() : _type("unknown")
 {
     std::cout << "Wrong Animal created" << std::endl;
     return;
@@ -34,7 +34,7 @@ WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs)
     return  *this;
 }
 
-WrongAnimal::~WrongAnimal( void )
+WrongAnimal::~WrongAnimal()
 {
     std::cout << "Wrong Animal destroyed" << std::endl;
     return ;

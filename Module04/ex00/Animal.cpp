@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:37:03 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 11:01:55 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:17:46 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-Animal::Animal( void ) : _type("unknown")
+Animal::Animal() : _type("default")
 {
     std::cout << "Animal created" << std::endl;
     return;
@@ -34,17 +34,13 @@ Animal & Animal::operator=(Animal const & rhs)
     return  *this;
 }
 
-Animal::~Animal( void )
+Animal::~Animal()
 {
     std::cout << "Animal destroyed" << std::endl;
     return ;
 }
 
-std::string Animal::getType() const
-{
-    return this->_type;
-}
-
+std::string Animal::getType() const { return this->_type; }
 
 /*********************** PUBLIC MEMBER FUNCTION *****************************/
 
