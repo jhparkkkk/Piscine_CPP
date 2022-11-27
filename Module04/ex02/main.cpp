@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:29:45 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 15:03:52 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:45:17 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 int main ()
 {
     std::cout << "**** Construction ****" << std::endl;
-    // Animal abstract = Animal();
+    /* to test, it won't compile */
+    // Animal* Abstract = new Animal(); 
     const Animal* j = new Dog();
     const Animal* i = new Cat();
     
@@ -63,20 +64,14 @@ int main ()
         dog->displayIdeas();
         cat->setType("old cat");
         Cat *cat_copy = cat;
-        Dog *dog_copy = dog;
         cat->setIdeas("Nothing");
         delete cat;
         delete dog;
+        std::cout << std::endl; 
+        std::cout << std::endl; 
+        std::cout << std::endl; 
         cat_copy->displayIdeas();
-        dog_copy->displayIdeas();
-        delete cat_copy;
-        delete dog_copy;
     }
-    
-
-    
-        
-    
     
     std::cout << std::endl << std::endl << "**** Destruction ****" << std::endl;
     delete j;//should not create a leak

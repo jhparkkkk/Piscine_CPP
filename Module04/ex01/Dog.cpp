@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:55:07 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 13:39:12 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:32:45 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ Dog & Dog::operator=(Dog const & rhs)
 Dog::~Dog( void )
 {
     std::cout << "Dog destroyed" << std::endl;
+    delete _brain;
     return ;
 }
 

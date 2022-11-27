@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:55:07 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 14:36:20 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:18:04 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-Brain::Brain( void )
+Brain::Brain()
 {
     std::cout << "Brain created" << std::endl;
     return;
@@ -36,7 +36,7 @@ Brain & Brain::operator=(Brain const & rhs)
     return  *this;
 }
 
-Brain::~Brain( void )
+Brain::~Brain()
 {
     std::cout << "Brain destroyed" << std::endl;
     return ;

@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:40:29 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/25 10:24:39 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:54:49 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ class   Bureaucrat {
     class   GradeTooHighException : public std::exception
     {
         public:
-            virtual const char * what() const throw()
-            { return ": Grade is too high."; }
+            virtual const char * what() const throw();
         
     };
     class   GradeTooLowException : public std::exception
     {
         public:
-            virtual const char * what() const throw()
-            { return ": Grade is too low."; }
+            virtual const char * what() const throw();
     };
     
     

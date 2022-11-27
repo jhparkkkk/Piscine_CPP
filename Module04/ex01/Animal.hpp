@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:31:20 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 14:54:42 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:37:11 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 class   Animal{
     public:
-        Animal( void );
+        Animal();
         Animal( Animal const & src);
         Animal & operator=(Animal const & rhs);
-        virtual ~Animal( void );
+        virtual ~Animal();
 
         std::string getType() const;
         

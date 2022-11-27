@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 17:14:22 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/24 18:39:51 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 19:05:14 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ MateriaSource & MateriaSource::operator=(MateriaSource const & rhs)
 MateriaSource::~MateriaSource( void )
 {
     std::cout << "MateriaSource destroyed" << std::endl;
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < _nbMateria; i++)
         if (_materia[i])
             delete _materia[i];
     return ;

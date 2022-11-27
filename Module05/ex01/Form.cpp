@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:36:18 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/25 14:47:44 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:50:55 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,16 @@ std::ostream & operator<<( std::ostream & o, Form const & rhs)
     << "Grade to sign: " << rhs.getGradeTosign() << std::endl
     << "Grade to execute: " << rhs.getGradeToExecute() << std::endl;
     return o;
+}
+
+/************************** EXCEPTIONS ****************************************/
+
+const char * Form::GradeTooHighException::what() const throw()
+{
+    return "grade is too high";
+}
+
+const char * Form::GradeTooLowException::what()const throw()
+{
+	return "grade is too low" ;
 }

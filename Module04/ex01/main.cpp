@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:29:45 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 14:48:25 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:41:00 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,14 @@ int main ()
         dog->displayIdeas();
         cat->setType("old cat");
         Cat *cat_copy = cat;
-        Dog *dog_copy = dog;
         cat->setIdeas("Nothing");
         delete cat;
         delete dog;
+        std::cout << std::endl; 
+        std::cout << std::endl; 
+        std::cout << std::endl; 
         cat_copy->displayIdeas();
-        dog_copy->displayIdeas();
-        delete cat_copy;
-        delete dog_copy;
     }
-    
-
-    
-        
-    
     
     std::cout << std::endl << std::endl << "**** Destruction ****" << std::endl;
     delete j;//should not create a leak

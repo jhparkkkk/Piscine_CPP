@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:40:33 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/25 10:32:59 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:06:09 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@
 #define HIGHEST_GRADE 1
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
-Bureaucrat::Bureaucrat() : _name("default")
+
+Bureaucrat::Bureaucrat() :
+_name("default"),
+_grade(150)
 {
     std::cout << "Bureaucrat " << _name << " created" << std::endl;
     return;
 }
 
-Bureaucrat::Bureaucrat(std::string const & name, int grade) : _name(name), _grade(grade)
+/* 
+    Since name is const, attributs must be set with initialization list.
+    If grade value is incorrect, exception is thrown. This will be caught by
+    createBureaucrat(). (if I catch exception directly in the constructor,
+    bureaucrat is still created)
+*/
+Bureaucrat::Bureaucrat(std::string const & name, int grade) :
+_name(name),
+_grade(grade)
 {
-    try
-    {
-        if (_grade < 1)
-            throw GradeTooHighException();
-        else if (_grade > 150)
-            throw GradeTooLowException();
-    }
-    catch (Bureaucrat::GradeTooHighException & exception)
-    { std::cout << *this <<  exception.what() << std::endl; }
-    catch (Bureaucrat::GradeTooLowException & exception)
-    { std::cout << *this <<  exception.what() << std::endl; }
+    if (grade < 1)
+        throw GradeTooHighException();
+    if (grade > 150)
+        throw GradeTooLowException();
     std::cout << "Bureaucrat " << _name << " created" << std::endl;
     return;
 }
@@ -106,4 +110,16 @@ void    Bureaucrat::gradeDown()
     catch (Bureaucrat::GradeTooLowException & exception)
     { std::cout << _name << " cannot grade down: " << exception.what() << std::endl; }
     return;
+}
+
+/************************** EXCEPTIONS ****************************************/
+
+const char * Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "grade is too high";
+}
+
+const char * Bureaucrat::GradeTooLowException::what()const throw()
+{
+	return "grade is too low" ;
 }

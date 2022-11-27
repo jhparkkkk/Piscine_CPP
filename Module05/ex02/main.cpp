@@ -6,11 +6,15 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:40:10 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/26 17:07:27 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:59:48 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 /*
     Attempts to create a bureaucrat:
@@ -37,7 +41,7 @@ int main()
     Bureaucrat *alpha = NULL;
     Bureaucrat *beta = NULL;
     Bureaucrat *epsilon = NULL;
-
+    
     std::cout << std::endl << "* Invalid bureaucrat *" << std::endl;
     alpha = createBureaucrat(alpha, "Bernard", -1);
     beta = createBureaucrat(beta, "Lenina", 4032);
@@ -54,10 +58,25 @@ int main()
 
     std::cout << " * Bureaucrats' id *" << std::endl;
     std::cout << *alpha << std::endl;
-    std::cout << *beta << std::endl;
     std::cout << *epsilon << std::endl;
     
     std::cout << std::endl;
+    
+    std::cout << std::endl << "*--- FORMS ---*" << std::endl << std::endl;
+
+    AForm *shrub = new  ShrubberyCreationForm("tree");
+    AForm *rob = new RobotomyRequestForm("noise");
+    AForm *pres = new PresidentialPardonForm("plop");
+    
+    beta->executeForm(*shrub);
+    alpha->signForm(*shrub);
+    beta->executeForm(*shrub);
+    alpha->signForm(*rob);
+    beta->executeForm(*rob);
+
+    beta->signForm(*pres);
+    epsilon->executeForm(*pres);
+    alpha->executeForm(*pres);
     
     if (alpha)
         delete alpha;
@@ -65,6 +84,10 @@ int main()
         delete beta;
     if (epsilon)
         delete epsilon;
-    
+
+    delete shrub;
+    delete rob;
+    delete pres;
+
     return 0;
 }

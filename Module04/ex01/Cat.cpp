@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:53:30 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/23 14:41:55 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:32:26 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ Cat & Cat::operator=(Cat const & rhs)
 Cat::~Cat( void )
 {
     std::cout << "Cat destroyed" << std::endl;
+    delete _brain;
     return ;
 }
 

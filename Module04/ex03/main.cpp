@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:15 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/24 18:40:07 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 23:47:23 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int main()
     me->use(1, *bob);
     delete bob;
     delete me;
-    delete src;
     return 0;
 }

@@ -6,21 +6,21 @@
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:40:33 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/26 17:02:07 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:10:55 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
-Bureaucrat::Bureaucrat() : _name("default")
+Bureaucrat::Bureaucrat() :
+_name("default")
 {
     std::cout << "Bureaucrat " << _name << " created" << std::endl;
     return;
 }
-
 /* 
     Since name is const, attributs must be set with initialization list.
     If grade value is incorrect, exception is thrown. This will be caught by
@@ -63,7 +63,6 @@ Bureaucrat::~Bureaucrat( void )
 std::string const   Bureaucrat::getName() const { return _name ; }
 int                 Bureaucrat::getGrade() const { return _grade ; }
 
-
 /*********************** PUBLIC MEMBER FUNCTION *****************************/
 
 /*
@@ -105,16 +104,31 @@ void    Bureaucrat::gradeDown()
 /*
     form passed as parameter is signed by bureaucrat only if _grade < _gradeToSign.
 */
-void    Bureaucrat::signForm(Form & form)
+void    Bureaucrat::signForm(AForm & form)
 {
     try
     {
         form.beSigned(*this);
         std::cout << _name << " signed " << form.getName() << std::endl;
     }
-    catch (Form::GradeTooLowException & exception)
-    { std::cout << _name << " couldn’t sign " << form.getName()
+    catch (AForm::GradeTooLowException & exception)
+    { std::cout << _name << " can't sign " << form.getName()
         << " because " << exception.what() << std::endl; }
+}
+
+void    Bureaucrat::executeForm(AForm const & form)
+{
+    try 
+    {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch (std::exception & ex)
+    {
+        std::cout << _name << " can't execute " << form.getName()
+        << " because " <<  ex.what() << std::endl;
+    }
+    return;
 }
 
 /************************* NON MEMBER FUNCTION *******************************/
@@ -135,4 +149,9 @@ const char * Bureaucrat::GradeTooHighException::what() const throw()
 const char * Bureaucrat::GradeTooLowException::what()const throw()
 {
 	return "grade is too low" ;
+}
+
+const char * Bureaucrat::FailedExecutionException::what()const throw()
+{
+    return "cannot execute." ;
 }
