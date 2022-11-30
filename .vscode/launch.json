@@ -8,8 +8,8 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/Module05/ex03/bureaucrat",
-            "args": [],
+            "program": "${workspaceFolder}/Module06/ex00/convert",
+            "args": ["3"],
             "cwd": "${workspaceFolder}"
         }
     ]
