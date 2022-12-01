@@ -1,12 +1,12 @@
-NAME	=	convert
+NAME	=	serialize
 
 CC		=	clang++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -pedantic
 RM		=	rm -rf
 
 SRCS	=	main.cpp \
-			convert.cpp \
-			parse.cpp 
+			serialize.cpp \
+			deserialize.cpp  
 
 OBJS	=	$(SRCS:.cpp=.o)
 

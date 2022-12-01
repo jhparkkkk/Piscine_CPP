@@ -1,12 +1,12 @@
-NAME	=	convert
+NAME	=	type
 
 CC		=	clang++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -pedantic
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 
 RM		=	rm -rf
 
 SRCS	=	main.cpp \
-			convert.cpp \
-			parse.cpp 
+			Base.cpp \
+	
 
 OBJS	=	$(SRCS:.cpp=.o)
 

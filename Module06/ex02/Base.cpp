@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 10:13:36 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/30 23:54:30 by jeepark          ###   ########.fr       */
+/*   Created: 2022/12/01 12:44:08 by jeepark           #+#    #+#             */
+/*   Updated: 2022/12/01 16:40:42 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "convert.hpp"
-#include <limits>
+#include "Base.hpp"
 
-int  main (int ac, char **av)
+/*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
+
+Base::~Base( void )
 {
-    if (ac != 2)
-    {
-        std::cout << "Invalid input: only one argument authorized." << std::endl;
-        exit(-1);
-    }
-    Convert convert;
-    try
-    {
-        convert = Convert(av[1]);
-    }
-    catch (const Convert::InvalidInputException & ex)
-    {
-        std::cout << ex.what() << std::endl;
-    }
-    return 0;
+      std::cout << "Base destroyed" << std::endl;
+      return;
 }

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   serialization.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 10:13:36 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/30 23:54:30 by jeepark          ###   ########.fr       */
+/*   Created: 2022/11/30 23:52:05 by jeepark           #+#    #+#             */
+/*   Updated: 2022/12/01 12:19:50 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "convert.hpp"
-#include <limits>
+#ifndef SERIALIZATION_H
+ #define SERIALIZATION_H
+#include <stdint.h>
 
-int  main (int ac, char **av)
+struct  Data  
 {
-    if (ac != 2)
-    {
-        std::cout << "Invalid input: only one argument authorized." << std::endl;
-        exit(-1);
-    }
-    Convert convert;
-    try
-    {
-        convert = Convert(av[1]);
-    }
-    catch (const Convert::InvalidInputException & ex)
-    {
-        std::cout << ex.what() << std::endl;
-    }
-    return 0;
-}
+    char    data1;
+    int     data2;
+    float   data3;
+    double  data4;    
+};
+
+uintptr_t   serialize(Data *ptr);
+Data*       deserialize(uintptr_t raw);            
+
+#endif
