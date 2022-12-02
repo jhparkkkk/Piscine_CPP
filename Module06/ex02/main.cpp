@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:44:22 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/01 17:47:53 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/02 22:26:07 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <stdlib.h>
 
 /*
     instanciates object (A, B, C) inherited from class Base.  
@@ -87,9 +88,9 @@ void    identify(Base & p)
         std::cout << "type is A" << std::endl;
         return; 
     }
-    catch (std::bad_cast & bc)
+    catch (std::exception & ex)
     {
-        std::cout << bc.what() << std::endl;
+        std::cout << ex.what() << std::endl;
     }
     try
     {
@@ -98,9 +99,9 @@ void    identify(Base & p)
         std::cout << "type is B" << std::endl;
         return;  
     }
-    catch (std::bad_cast & bc)
+    catch (std::exception & ex)
     {
-        std::cout << bc.what() << std::endl;
+        std::cout << ex.what() << std::endl;
     }
     try
     {
@@ -109,9 +110,9 @@ void    identify(Base & p)
         std::cout << "type is C" << std::endl;
         return;
     }
-    catch (std::bad_cast & bc)
+    catch (std::exception & ex)
     {
-        std::cout << bc.what() << std::endl;
+        std::cout << ex.what() << std::endl;
     }
     return;
 }
@@ -130,7 +131,8 @@ int main()
     std::cout << "-- result --" << std::endl;
     std::cout << test << std::endl;
     std::cout << &testref << std::endl;
-
     
+    delete test;
+    delete &testref;
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:46:29 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/30 23:54:50 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/02 21:39:44 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool Convert::isInt()
         return false;
     try
     {
-        int test = std::stoi(_str);
+        int test = std::atoi(_str.c_str());
         if (test)
             _type = INT;
     }
@@ -82,7 +82,7 @@ bool    Convert::isFloat()
         return false;
     try
     {
-        float test = std::stof(_str);
+        float test = std::strtof(_str.c_str(), NULL);
         if (test)
             _type = FLOAT;
     }
@@ -102,7 +102,7 @@ bool    Convert::isDouble()
         return false;
     try
     {
-        float test = std::stod(_str);
+        float test = std::strtod(_str.c_str(), NULL);
         if (test)
             _type = DOUBLE;
     }

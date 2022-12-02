@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:13:47 by jeepark           #+#    #+#             */
-/*   Updated: 2022/11/30 23:54:41 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/02 22:00:03 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <iomanip>
 #include <cfloat>
 #include <cmath>
-
+#include <string>
+#include <cstdlib>
+#include <bits/stdc++.h>
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
 
 Convert::Convert()
@@ -54,12 +56,12 @@ Convert::Convert( Convert const & src)
 Convert & Convert::operator=(Convert const & rhs)
 {
     // std::cout << "Convert Copy assignment operator called" << std::endl;
-    _str = rhs._str;
+	_str = rhs._str;
     _char = rhs._char;
     _int = rhs._int;
     _double = rhs._double;
     _float = rhs._float;
-
+	_type = rhs._type;
     return  *this;
 }
 
@@ -94,12 +96,13 @@ void    Convert::detectType()
 	int res = 0;
 	for (int i = 0; i < NB_TYPE; i++)
 		res += (this->*_is[i])();
-    if ( !res )
+    
+	if ( !res )
         throw (InvalidInputException());
 	if (_type == CHAR)
 		_char = static_cast <char> (_str[0]);
 	else
-		_toConvert = std::stod(_str);
+		_toConvert = std::strtod(_str.c_str(), NULL);
 }
 
 void	Convert::makeConversion()
@@ -149,41 +152,24 @@ void	Convert::castInt()
 		std::cout << "Int: " << _int << std::endl;
 		return;
 	}
-	try
+	if (_toConvert < INT_MIN || _toConvert > INT_MAX || isnan(_toConvert))
 	{
-		_int = stoi(_str);
+		std::cout << "Int: Impossible" << std::endl;
+		return;
 	}
-	catch (const std::invalid_argument& ia)
-    {
-        std::cout << "int: impossible " << std::endl;
-		_int = 0;
-		return;
-    }
-    catch (const std::out_of_range& oor)
-    {
-        std::cout << "int: impossible" << std::endl;
-		_int = 0;
-		return;
-    }
 	_int = static_cast <int> (_toConvert);
 	std::cout << "Int: " << _int << std::endl;
 }
 
 void	Convert::castFloat()
 {
-	if (_str == "-inff" || _str == "+inff" || _str == "-inf" || _str == "+inf")
-	{
-		_float = static_cast <float> (_toConvert);
-		std::cout << "Float: " << _float << 'f' << std::endl;
-		return;
-	}
 	if (_type == CHAR)
 	{
 		_float  = static_cast <int> (_char);
 		std::cout << "Float: " << std::setprecision(findPrecision(_str)) << std::fixed<< _float <<std::endl;
 		return;
 	}
-	if (_toConvert < -FLT_MAX || _toConvert > FLT_MAX)
+	if (!isinf(_toConvert) && (_toConvert < -FLT_MAX || _toConvert > FLT_MAX))
 	{
 		std::cout << "Float: impossible" << '\n';
 		return;
@@ -200,6 +186,11 @@ void	Convert::castDouble()
 		std::cout << "Double: " << std::setprecision(findPrecision(_str)) << std::fixed<< _double <<std::endl;
 		return;
 	}
+	if (!isinf(_toConvert) && (_toConvert < -FLT_MAX || _toConvert > FLT_MAX))
+	{
+		std::cout << "Double: impossible" << '\n';
+		return;
+	}
 	_double = static_cast <double> (_toConvert);
 	std::cout << "Double: " << std::setprecision(findPrecision(_str)) << std::fixed<< _double << std::endl;
 }
@@ -208,6 +199,7 @@ void	Convert::castDouble()
 /************************** NON MEMBER FUNCTION *******************************/
 std::ostream & operator<<( std::ostream & o, Convert const & rhs)
 {
+    o << "Type: " << rhs.getType() << std::endl;
     o << "Char: " << rhs.getChar() << std::endl;
     o << "Int: " << rhs.getInt() << std::endl;
     o << "Float: " << std::setprecision(rhs.findPrecision(rhs.getLitteral())) << std::fixed << rhs.getFloat() << 'f' <<std::endl; 

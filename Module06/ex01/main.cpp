@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:56:20 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/01 12:26:56 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/02 22:08:48 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ int main()
     Data set; 
     create_data(&set, 'A', 65, 65.0, 65.0);
     display_data(&set);
-       
+
+    /* serialiization */   
     uintptr_t serialized_data = serialize(&set);
     
-    std::cout << serialized_data << std::endl;
-
+    /* deserialization */
     Data * deserialized_data = deserialize(serialized_data);
-    
     display_data(deserialized_data);
     
     return 0;

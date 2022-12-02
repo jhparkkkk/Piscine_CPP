@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:40:04 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/01 19:01:18 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:09:25 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
 #include <iostream>
-
+#include <cstddef>
+#include <iostream>
+#include <string>
 template < typename T >
 void    swap(T & a, T &b)
 {
@@ -21,6 +23,7 @@ void    swap(T & a, T &b)
     tmp = a;
     a = b;
     b = tmp;
+    return;
 }
 
 template < typename T >

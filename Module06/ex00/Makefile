@@ -1,7 +1,7 @@
 NAME	=	convert
 
-CC		=	clang++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -pedantic
+CC		=	c++
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM		=	rm -rf
 
 SRCS	=	main.cpp \

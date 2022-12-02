@@ -1,14 +1,14 @@
-NAME	=	iter
+NAME	=	array
 
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -MMD
 RM		=	rm -rf
 
 SRCS	=	main.cpp \
 	
 OBJS	=	$(SRCS:.cpp=.o)
 
-all: $(NAME)
+all: $(NAME) Makefile
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
@@ -22,5 +22,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+-include : $(OBJS:%.o=%.d)
 
 .PHONY:		all clean fclean re 

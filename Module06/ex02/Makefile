@@ -1,6 +1,6 @@
 NAME	=	type
 
-CC		=	clang++
+CC		=	c++
 CFLAGS	=	-Wall -Werror -Wextra -std=c++98 
 RM		=	rm -rf
 
