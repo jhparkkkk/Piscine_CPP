@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 23:44:14 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/03 18:31:27 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/04 19:21:33 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,8 @@
 template <typename T>
 void    easyfind(std::vector<T> p1, int p2)
 {
-    (void)p2;
-    std::cout << "easyfind\n" ;
-
-    std::cout << "size : " << p1.size() << '\n';
-    
-    for (size_t i=0; i<p1.size(); i++)
-        std::cout << " " << p1[i];
+    // for (size_t i=0; i<p1.size(); i++)
+    //     std::cout << " " << p1[i];
 
     std::vector<int>::iterator it;    
     
@@ -37,9 +32,8 @@ void    easyfind(std::vector<T> p1, int p2)
         std::cout << it - p1.begin() << '\n';
     }
     else
-        std::cout << "Element not found\n";
+        throw(std::exception());
     return;
 }
-
 
 #endif

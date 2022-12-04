@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:36:46 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/04 16:31:23 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/04 19:29:21 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ class   Array
                 std::cout << ex.what() << std::endl;
                 return;
             }
-            std::cout << _size << std::endl;
-            // if (_size < 0)
-            // {
-            //     std::cout << "ici" <<std::endl;
-            //     throw(std::exception());
-            //     // return;
-            // }
 			_tab = new T[_size]();
 			bzero(_tab, _size);
     		std::cout << "Array< T > created" << std::endl;
@@ -79,17 +72,6 @@ class   Array
 			std::cout << "destructor" << std::endl;
 			if (this->_tab)
 			    delete[] this->_tab;
-			// delete  _tab;
-			// if (_size > 0)
-			// delete [] _tab;
-			// try 
-			// {
-			// 	delete [] _tab;
-			// }
-			// catch(std::exception & ex)
-			// {
-			// 	std::cout << ex.what() << std::endl;
-			// }	
 		}
 		unsigned int size() const
 		{
@@ -103,8 +85,7 @@ class   Array
 template< typename T>
 std::ostream & operator<<(std::ostream & o, Array<T> const & rhs)
 {
-	// (void)rhs;
-	// std::cout << "plop" << std::endl;
+
 	o << "size: "<< rhs.size() <<  std::endl;
 	try
 	{
