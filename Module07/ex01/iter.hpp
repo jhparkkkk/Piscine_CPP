@@ -6,7 +6,7 @@
 /*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:45:08 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/02 18:24:36 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/03 19:03:14 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void    iter( T * array, int size, void (*fct)(T &))
     
     return;
 }
-
 #endif

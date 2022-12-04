@@ -1,14 +1,15 @@
-NAME	=	array
+NAME	=	find
 
 CC		=	c++
-CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -MMD -g
+CFLAGS	=	-Wall -Werror -Wextra -std=c++98 -MMD
 RM		=	rm -rf
 
 SRCS	=	main.cpp \
 	
+
 OBJS	=	$(SRCS:.cpp=.o)
 
-all: $(NAME) Makefile
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
