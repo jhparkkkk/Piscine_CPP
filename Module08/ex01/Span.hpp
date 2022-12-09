@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 22:19:27 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/04 22:02:56 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/08 22:53:00 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class   Span
         int             shortestSpan() const;
         int             longestSpan() const;
         
-        void            addNumber(unsigned int start, unsigned int end, int const n);
+        void            addNumber(unsigned int, int const n);
 
         class   FullException : public std::exception
         {
@@ -37,6 +37,11 @@ class   Span
                 virtual const char * what() const throw();
         };
         class   SpanException : public std::exception
+        {
+            public:
+                virtual const char * what() const throw();
+        };
+        class   OutOfSpaceException : public std::exception
         {
             public:
                 virtual const char * what() const throw();

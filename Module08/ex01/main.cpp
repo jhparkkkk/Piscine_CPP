@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeepark <jeepark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jeepark <jeepark@student42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 22:20:18 by jeepark           #+#    #+#             */
-/*   Updated: 2022/12/04 22:57:40 by jeepark          ###   ########.fr       */
+/*   Updated: 2022/12/08 23:18:39 by jeepark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main()
     span3.addNumber(3);
     try 
     {
-        span3.longestSpan();
+        std::cout << span3.longestSpan() << std::endl;
     }
     catch (Span::SpanException & ex)
     {
@@ -57,7 +57,7 @@ int main()
 
     try 
     {
-        span3.shortestSpan();
+        std::cout << span3.shortestSpan() << std::endl;
     }
     catch (Span::SpanException & ex)
     {
@@ -67,7 +67,7 @@ int main()
     span3.addNumber(12);
     try 
     {
-        span3.shortestSpan();
+        std::cout << span3.shortestSpan() << std::endl;
     }
     catch (Span::SpanException & ex)
     {
@@ -75,8 +75,25 @@ int main()
     }
 
     Span span4(6);
-    span4.addNumber(0, 3, 10);
-
+    std::vector<int> span(4);
+    try
+    {
+        span4.addNumber(static_cast <unsigned int>(-12), 9);
+    }
+    catch (Span::OutOfSpaceException & ex)
+    {
+        std::cout << ex.what() << std::endl;
+    }
+    try
+    {
+        span4.addNumber(static_cast <unsigned int>(6), 9);
+    }
+    catch (Span::OutOfSpaceException & ex)
+    {
+        std::cout << ex.what() << std::endl;
+    }
     std::cout << span4;
+
+
     return  0;
 }
