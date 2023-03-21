@@ -47,20 +47,20 @@ int RPN::makeOperation(const char c) {
     int v1 = _c.top();
     _c.pop();
 
-    int idx = 0;
-    while(idx < 4 && _operatorType[idx] != c) idx++;
+    int i = 0;
+    while(i < 4 && _operatorType[i] != c) i++;
     
     int res;
-    switch (idx)
+    switch (i)
     {
         case 0:
-            res = (this->*_f[idx])(v1, v2); break;
+            res = (this->*_f[i])(v1, v2); break;
         case 1:
-            res = (this->*_f[idx])(v1, v2); break;
+            res = (this->*_f[i])(v1, v2); break;
         case 2:
-            res = (this->*_f[idx])(v1, v2); break;
+            res = (this->*_f[i])(v1, v2); break;
         case 3:
-            try { res = (this->*_f[idx])(v1, v2); break; }
+            try { res = (this->*_f[i])(v1, v2); break; }
             catch (NaNException & e) {
                 std:: cout << e.what() << "\n";
                 exit(1); }

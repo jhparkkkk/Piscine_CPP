@@ -12,9 +12,10 @@ BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(std::string const & file)
 {
-    getDatabase();
+    // getDatabase();
     try
     {
+        getDatabase();
         parseInputFile(file);
     }
     catch (FileException & e) {
@@ -23,25 +24,33 @@ BitcoinExchange::BitcoinExchange(std::string const & file)
    
 }
 
+BitcoinExchange::BitcoinExchange(BitcoinExchange const & src ) { *this = src; }
+
+BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & o) {
+    this->_data = o._data;
+    return *this; 
+}
+
 BitcoinExchange::~BitcoinExchange() {}
 
 /************************** PUBLIC MEMBER FUNCTION ****************************/
 
+/* If file data.csv is valid, copy its contents to _data */
 void    BitcoinExchange::getDatabase()
 {
     std::string dbname = "data.csv";
-    std::string line;
-    std::string date;
-    std::string key;
+    std::string line, date, key;
     
+    //check if file is valid
     std::ifstream f(dbname.c_str());
     if (!f.good())
         throw(FileException());
     
+    //parse each line from data.csv 
+    //and stores it in container _data<std::string, float>
     std::getline(f, line);
     while (std::getline(f, line, ','))
     {
-
         key = line;
         getline(f,line);
         std::stringstream ss(line);
@@ -49,65 +58,77 @@ void    BitcoinExchange::getDatabase()
         ss >> value;
         _data.insert(std::pair<std::string, float>(key, value));
     }
-
 }
 
+/*
+    first, searches for a date match. If not found, searches for the 
+    closest lower bound. 
+*/
 float    BitcoinExchange::findValue(std::string key)
 {
-    std::map<std::string, float>::iterator it;
+    std::map<std::string, float>::iterator it;   
     
     it = _data.find(key);
     if (it != _data.end())
         return it->second;
+    
     it = _data.lower_bound(key);
-    if (it != _data.end())
-    {
+    if (it != _data.end()) {
         --it;
         return it->second;
     }
     return -1;  
 }
 
+/* checks if date is in valid format yyyy-mm-dd */
 bool   BitcoinExchange::parseKey(std::string & key)
 {
     char buffer [80];
     const char *str = key.c_str();
     struct tm tm;
     char *end = strptime(str, "%Y-%m-%d", &tm);
-
-    if (end == NULL || *end != '\0' || strftime (buffer,80,"%Y-%m-%d",&tm) == 0)
+    if (end == NULL || *end != '\0' || !strftime(buffer,80,"%Y-%m-%d",&tm))
     {
-        std::cout << "Error: bad input => [" << key << "]\n";
+        std::cerr << "Error: bad input => " << key << "\n";
         return false;
     }
     return true;
 }
-bool BitcoinExchange::parseValue(std::stringstream  & value)
+
+bool BitcoinExchange::parseValue(std::string const value) const
 {
-    std::string test = value.str();
-    if (test.find_first_not_of("0123456789.") != std::string::npos)
+    std::stringstream ss(value);
+    if (value.find_first_not_of("0123456789.") != std::string::npos)
     {
-        int test;
-        value >> test;
-        if (test == 0)
+        int value;
+        ss >> value;
+        if (value == 0)
             return true;
-        if (test < 0)
+        if (value < 0)
         {
-            std::cout << "Error: not a positive number.\n";
+            std::cerr << "Error: not a positive number.\n";
             return false;
         }
-        std::cout << "Error: only digit character permitted.\n";
+        std::cerr << "Error: only digit characters permitted.\n";
         return false;
     }
-    
     int converted_value;
-    value >> converted_value;
+    ss >> converted_value;
     if (converted_value> MAX_VALUE)
     {
-        std::cout << "Error: too large a number.\n";
+        std::cerr << "Error: too large a number.\n";
             return false;
     }
     return true;
+}
+
+void    BitcoinExchange::calculatePrice(std::string key, std::string value)
+{
+    std::stringstream s(value);
+    float res;
+    s >> res;
+    if (res == -0 ) res *= -1;
+    std::cout << key << " => " << res << " = " << res * findValue(key) << "\n";
 }
 
 
@@ -117,38 +138,32 @@ void    BitcoinExchange::parseInputFile(std::string const & file)
     std::ifstream f(file.c_str());
     if (!f.good())
         throw(FileException());
-    std::string line;
-    std::string date;
-    std::string key;
-    std::string value;
+    std::string line, date, key, value;
 
-    // skip first line
+    // skips first line
     std::getline(f, line);
-
+    // parses each line + calculates
     while(!f.eof())
     {
         std::getline(f,line);
-        std::size_t first = line.find(" | ");
-        if (first != std::string::npos)
+        std::size_t delim = line.find(" | ");
+        if (delim != std::string::npos)
         {
-            key = line.substr(0, first);
+            // gets the date to look up in _data
+            key = line.substr(0, delim);
+            // if the date is valid
             if (parseKey(key))
             {
-                value = line.substr(first + 3, line.find('\n'));
-                std::stringstream ss(value);
-                if (parseValue(ss))
-                {
-                    std::stringstream s(value);
-                    float res;
-                    s >> res;
-                    if (res == -0 ) res *= -1;
-                    std::cout << key << " => " << res << " = " << res * findValue(key) <<  "\n";
-                }
-                
+                // then gets the value to calculate
+                value = line.substr(delim + 3, line.find('\n'));
+                // if the value is valid then calculates it with
+                // the corresponding date.
+                if (parseValue(value))
+                    calculatePrice(key, value);
             }
         }
         else
-            std::cout << "Error: invalid format => " << line << "\n";
+            std::cerr << "Error: invalid format => " << line << "\n";
     }
 }
 
