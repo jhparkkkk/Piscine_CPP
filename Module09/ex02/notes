@@ -1,0 +1,98 @@
+void merge_sort(list<int>& lst) {
+    if (lst.size() <= 1) {
+        return;
+    }
+    list<int> left, right, result;
+    int middle = lst.size() / 2;
+    for (int i = 0; i < middle; ++i) {
+        left.push_back(lst.front());
+        lst.pop_front();
+    }
+    while (!lst.empty()) {
+        right.push_back(lst.front());
+        lst.pop_front();
+    }
+    merge_sort(left);
+    merge_sort(right);
+    merge_lists(left, right, result);
+    lst.swap(result);
+}
+
+void merge_lists(list<int>& list1, list<int>& list2, list<int>& result) {
+    while (!list1.empty() && !list2.empty()) {
+        if (list1.front() < list2.front()) {
+            result.push_back(list1.front());
+            list1.pop_front();
+        } else {
+            result.push_back(list2.front());
+            list2.pop_front();
+        }
+    }
+    while (!list1.empty()) {
+        result.push_back(list1.front());
+        list1.pop_front();
+    }
+    while (!list2.empty()) {
+        result.push_back(list2.front());
+        list2.pop_front();
+    }
+}
+
+procedure insertionSort(A: list of sortable items)
+   n = length(A)
+   for i = 1 to n - 1 do
+       j = i
+       while j > 0 and A[j-1] > A[j] do
+           swap(A[j], A[j-1])
+           j = j - 1
+       end while
+   end for
+end procedure
+
+std::list<int>::iterator it = a.begin();
+    
+    while (it != a.end()) {
+        int value = *it;
+        std::list<int>::iterator insertion_pos = it;
+        
+        while (insertion_pos != a.begin() && *(--insertion_pos) > value) {
+        }
+        ++insertion_pos;
+        
+        if (insertion_pos != it) {
+            a.erase(it);
+            a.insert(insertion_pos, value);
+        }
+        ++it;
+    }
+
+include "plf_nanotimer.h"
+  #include <iostream>
+
+  int main(int argc, char** argv)
+  {
+      plf::nanotimer timer;
+
+      timer.start()
+
+      // Do something here
+
+      double results = timer.get_elapsed_ns();
+      std::cout << "Timing: " << results << " nanoseconds." << std::endl;    
+      return 0;
+  }
+
+ timespec tS;
+    tS.tv_sec = 0;
+    tS.tv_nsec = 0;
+    clock_settime(CLOCK_PROCESS_CPUTIME_ID, &tS);
+    ...
+    ... <code to check for the time to be put here>
+    ...
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &tS);
+    cout << "Time taken is: " << tS.tv_sec << " " << tS.tv_nsec << endl;
+
+clock_t start = clock();
+algorithm();
+clock_t end = clock();
+double time = (double) (end-start) / CLOCKS_PER_SEC * 1000.0;
