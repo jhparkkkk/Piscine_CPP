@@ -6,6 +6,6 @@ int main (int ac, char **av)
 
     Sort copy(test);
 
-    return EXIT_SUCCESS;
+    return 0;
 }
 

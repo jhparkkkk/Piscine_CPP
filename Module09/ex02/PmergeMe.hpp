@@ -5,6 +5,7 @@
 #include <list>
 #include <vector>
 #include <ctime>
+#include <assert.h>
 
 #define THRESHOLD 10
 
@@ -20,17 +21,16 @@ class   Sort
         void    findDuplicates();
         void    displayUnsortedSequence();
         void    fillContainers();
-        // void    doSort();
         void    displayResult();
         void    displayResultVector();
 
         template <typename Container>
-        void    doSort(Container& container, double& time)
+        void    doSort(Container& container, long double& time)
         {
             clock_t start = clock();
             sortSequence(container);
             clock_t end = clock();
-            time = (double) (end-start) / CLOCKS_PER_SEC * 1000.0;
+            time = (long double) (end-start) / CLOCKS_PER_SEC * 1000.0;
         }
 
         template <typename Container>
@@ -132,8 +132,8 @@ class   Sort
         std::vector<int>    _toSort;
         std::vector<int>    _cVector;     
         std::list<int>      _cList;
-        double              _timeVector;
-        double              _timeList;
+        long double              _timeVector;
+        long double              _timeList;
         Sort();
 };
 
