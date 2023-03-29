@@ -1,13 +1,16 @@
 #include "RPN.hpp"
-
-
+#include <stdlib.h>
+#include <algorithm>
+#include <limits.h>
 /*......................... CONSTRUCTORS & DESTRUCTOR ..........................*/
 
 RPN::RPN() {}
 
 RPN::RPN(std::string const & arg) : _expr(arg)
 {
-    refaktorExpression();
+    try {refaktorExpression(); }
+    catch (InvalidNumberException & e) {
+        std::cerr << e.what() << "\n"; return; }
 
     _f[0] = &RPN::add;
     _f[1] = &RPN::substract;
@@ -16,8 +19,9 @@ RPN::RPN(std::string const & arg) : _expr(arg)
 
     try { calculate(); }
     catch (RpnException & e) {
-        std:: cout << e.what() << "\n";
-        exit(1); }
+        std::cerr << e.what() << "\n"; }
+    catch (NaNException & e) {
+        std::cerr << e.what() << "\n"; }
 }
 
 RPN::RPN( RPN const & src) { *this = src;}
@@ -37,20 +41,29 @@ bool RPN::isOperand(const char c)
     { return (std::isdigit(c)); }
 
 void    RPN::refaktorExpression() {
+    // checks if expression is valid
+    std::string::iterator it = _expr.begin();
+    while (it != _expr.end())
+    {
+        if (!isspace(*it) && !isspace(*(it + 1)) && (it+1) != _expr.end())
+            throw(InvalidNumberException());
+        it++;
+    }
+    // refaktor string by removing space characters
     _expr.erase(std::remove_if(_expr.begin(), _expr.end(), ::isspace), _expr.end());}
 
 int RPN::makeOperation(const char c) {
-    int v2 = _c.top();
+    long long v2 = _c.top();
     _c.pop();
     if (_c.empty())
         throw (RpnException());
-    int v1 = _c.top();
+    long long v1 = _c.top();
     _c.pop();
 
     int i = 0;
     while(i < 4 && _operatorType[i] != c) i++;
     
-    int res;
+    long long res;
     switch (i)
     {
         case 0:
@@ -60,10 +73,14 @@ int RPN::makeOperation(const char c) {
         case 2:
             res = (this->*_f[i])(v1, v2); break;
         case 3:
-            try { res = (this->*_f[i])(v1, v2); break; }
-            catch (NaNException & e) {
-                std:: cout << e.what() << "\n";
-                exit(1); }
+            if (!v2 || (!v1 && !v2))
+                throw (NaNException());
+            res = (this->*_f[i])(v1, v2); break;
+    }
+    if (res > INT_MAX || res < INT_MIN)
+    {
+        std::cerr << "Error: not a valid number.\n";
+        exit(1);
     }
     return res;
 }
@@ -85,17 +102,13 @@ void    RPN::calculate() {
     std::cout << _c.top() << "\n";
 }
 
-int RPN::add(int v1, int v2) { return v1 + v2; }
+long long RPN::add(long long v1, long long v2) { return v1 + v2; }
 
-int RPN::substract(int v1, int v2) { return v1 - v2; }
+long long RPN::substract(long long v1, long long v2) { return v1 - v2; }
 
-int RPN::multiply(int v1, int v2) { return v1 * v2; }
+long long RPN::multiply(long long v1, long long v2) { return v1 * v2; }
 
-int RPN::divide(int v1, int v2) {
-    if (!v2 || (!v1 && !v2))
-        throw (NaNException());
-    return v1 / v2;
-}
+long long RPN::divide(long long v1, long long v2) { return v1 / v2; }
 
 /*............................. NON MEMBER FUNCTIONS ..........................*/
 
@@ -106,3 +119,5 @@ const char RPN::_operatorType[4] = {'+', '-', '*', '/'};
 const char * RPN::RpnException::what() const throw() { return "Error"; }
 
 const char * RPN::NaNException::what() const throw() { return "NaN"; }
+
+const char * RPN::InvalidNumberException::what() const throw() { return "Error"; }

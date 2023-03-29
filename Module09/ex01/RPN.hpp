@@ -18,10 +18,10 @@ class   RPN
         void    calculate();
         int     makeOperation(const char);
 
-        int     add(int, int);
-        int     substract(int, int);
-        int     multiply(int, int);
-        int     divide(int, int);
+        long long     add(long long, long long);
+        long long     substract(long long, long long);
+        long long     multiply(long long, long long);
+        long long     divide(long long, long long);
 
         class RpnException : public std::exception {
             public:
@@ -33,12 +33,17 @@ class   RPN
                 virtual const char* what() const throw();
         };
 
+        class InvalidNumberException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
     private:
         std::stack<int> _c;
         std::string _expr;
 
         char static const _operatorType[4];
-        int (RPN::*_f[4])(int, int);
+        long long (RPN::*_f[4])(long long, long long);
 
         RPN();
 };

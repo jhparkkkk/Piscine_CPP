@@ -6,11 +6,10 @@ int main (int ac, char **av)
     {
         std::cerr << "Error: only one argument required.\n"
         << "Usage: ./RPN \"<expression>\".\n";
-        return (EXIT_FAILURE);
+        return (1);
     }
 
     RPN test(av[1]);
 
-
-    return EXIT_SUCCESS;
+    return (0);
 }

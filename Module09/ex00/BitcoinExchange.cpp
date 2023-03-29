@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <ctime>
-
+#include <stdlib.h>
 #define MAX_VALUE 1000 
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
@@ -12,7 +12,6 @@ BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(std::string const & file)
 {
-    // getDatabase();
     try
     {
         getDatabase();
