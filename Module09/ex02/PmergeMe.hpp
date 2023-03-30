@@ -42,9 +42,9 @@ class PmergeMe {
         std::vector<int>        _toSort;
         std::vector<int>        _cVector;     
         std::list<int>          _cList;
-        long double             _timeVector;
+        float                   _timeVector;
         long double             _timeList;
-
+        bool                    _isStraggler;
         int                     _straggler;
         std::vector<std::pair<int, int> >   _splitData;
         std::vector<int>        _vectorRes;

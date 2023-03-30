@@ -24,6 +24,7 @@ PmergeMe::PmergeMe(char** av, int ac)
     // doSort(this->_cList, this->_timeList);
     // doSort(this->_cVector, this->_timeVector);
     displayResultVector();
+    displayResult();
     return;
 }
 
@@ -53,10 +54,12 @@ void    PmergeMe::findStraggler()
 {
     if (_cVector.size() % 2 != 0)
     {
+        _isStraggler = true;
         _straggler = _cVector.back(); 
         _cVector.pop_back();
     }
-
+    else
+        _isStraggler = false;
 }
 
 /* split data into pairs */
@@ -68,9 +71,7 @@ void   PmergeMe::createPairs()
     {
         _splitData.push_back(std::make_pair(_cVector[i], _cVector[i + 1]));
         i += 2;
-    }
-
-    
+    }    
 
 }
 
@@ -132,15 +133,25 @@ void    PmergeMe::createRes()
         _vectorRes.insert(lower, _splitData[i].first);
 
     }
+    if (_isStraggler)
+    {
+         std::vector<int>::iterator lower = std::lower_bound(_vectorRes.begin(), _vectorRes.end(), _straggler);
+        _vectorRes.insert(lower, _straggler);
+    }   
 }
 
 void    PmergeMe::mergeInsertSort()
 {
+    clock_t start = clock();
     findStraggler();
     createPairs();
     sortPairs();
     sortByLargerValue();
     createRes();
+    clock_t end = clock();
+    _timeVector = static_cast<float> (end-start) / CLOCKS_PER_SEC * 1000000.0;
+
+
 }
 
 void    PmergeMe::fillContainers()
@@ -191,12 +202,12 @@ void    PmergeMe::displayUnsortedSequence()
 
 void    PmergeMe::displayResult()
 {
-    std::cout << "After: ";
-    for (std::list<int>::iterator it=_cList.begin(); it != _cList.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << "\n";
-    std::cout << "Time to process a range of " << _toSort.size() << " elements with std::vector : " << _timeVector << " ms.\n";
-    std::cout << "Time to process a range of " << _toSort.size() << " elements with std::list : " << _timeList << " ms.\n";
+    // std::cout << "After: ";
+    // for (std::list<int>::iterator it=_cList.begin(); it != _cList.end(); ++it)
+        // std::cout << *it << " ";
+    // std::cout << "\n";
+    std::cout << "Time to process a range of " << _toSort.size() << " elements with std::vector : " << _timeVector << " us.\n";
+    // std::cout << "Time to process a range of " << _toSort.size() << " elements with std::list : " << _timeList << " ms.\n";
 
 }
 
