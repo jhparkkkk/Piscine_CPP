@@ -31,6 +31,7 @@ class BitcoinExchange
         void    getDatabase();
         void    parseLine(std::string const & line);
         bool    parseKey(std::string & key);
+        bool    verifyDateValue(std::string key);
         bool    parseValue(std::string const value) const;        
         float   findValue(std::string key);
         void    calculatePrice(std::string key, std::string value);

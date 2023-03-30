@@ -42,13 +42,13 @@ bool RPN::isOperand(const char c)
 
 void    RPN::refaktorExpression() {
     // checks if number is less than 10
-    std::string::iterator it = _expr.begin();
-    while (it != _expr.end())
-    {
-        if (isdigit(*it) && isdigit(*(it + 1)) && (it+1) != _expr.end())
-            throw(InvalidNumberException());
-        it++;
-    }
+    // std::string::iterator it = _expr.begin();
+    // while (it != _expr.end())
+    // {
+    //     if (isdigit(*it) && isdigit(*(it + 1)) && (it+1) != _expr.end())
+    //         throw(InvalidNumberException());
+    //     it++;
+    // }
     // refaktor string by removing space characters
     _expr.erase(std::remove_if(_expr.begin(), _expr.end(), ::isspace), _expr.end());}
 
@@ -94,6 +94,8 @@ void    RPN::calculate() {
             _c.push((*it - '0'));
         else if (isOperator(*it))
             _c.push(makeOperation(*it));
+        else
+            throw RpnException();
         ++it;
     }
 

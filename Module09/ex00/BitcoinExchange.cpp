@@ -4,6 +4,9 @@
 #include <string>
 #include <ctime>
 #include <stdlib.h>
+#include <bits/stdc++.h>
+#include <vector>
+#include<cstdio>
 #define MAX_VALUE 1000 
 
 /*********************** CONSTRUCTOR & DESTRUCTOR *****************************/
@@ -79,13 +82,47 @@ float    BitcoinExchange::findValue(std::string key)
     return -1;  
 }
 
+bool    BitcoinExchange::verifyDateValue(std::string key)
+{
+    std::vector<int> data;
+    std::istringstream f(key);
+    std::string s;
+    int num;
+    int i = 0;
+    while (getline(f, s, '-')) {
+        if (i != 0 && s.size() != 2)
+            return false;
+        std::stringstream ss; 
+        ss << s;
+        ss >> num;
+        data.push_back(num);
+        i++;
+    }
+    std::time_t t = std::time(NULL);
+    std::tm *const pTInfo = std::localtime(&t);
+    int current_year = 1900 + pTInfo->tm_year;
+    if (data[0] < 2009 || data[0] > current_year)
+        return false;
+    if (data[1] < 1 || data[1] > 12)
+        return false;
+    if (data[2] < 0 || data[2] > 31)
+        return false;
+    return true;
+}
+
 /* checks if date is in valid format yyyy-mm-dd */
 bool   BitcoinExchange::parseKey(std::string & key)
 {
+    if (verifyDateValue(key)==false)
+    {
+        std::cerr << "Error: bad input => " << key << "\n";
+        return false;
+    }    
     char buffer [80];
     const char *str = key.c_str();
     struct tm tm;
     char *end = strptime(str, "%Y-%m-%d", &tm);
+
     if (end == NULL || *end != '\0' || !strftime(buffer,80,"%Y-%m-%d",&tm))
     {
         std::cerr << "Error: bad input => " << key << "\n";
