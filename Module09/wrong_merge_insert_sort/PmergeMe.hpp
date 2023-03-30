@@ -132,8 +132,8 @@ class   Sort
         std::vector<int>    _toSort;
         std::vector<int>    _cVector;     
         std::list<int>      _cList;
-        long double              _timeVector;
-        long double              _timeList;
+        long double         _timeVector;
+        long double         _timeList;
         Sort();
 };
 

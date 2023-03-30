@@ -41,11 +41,11 @@ bool RPN::isOperand(const char c)
     { return (std::isdigit(c)); }
 
 void    RPN::refaktorExpression() {
-    // checks if expression is valid
+    // checks if number is less than 10
     std::string::iterator it = _expr.begin();
     while (it != _expr.end())
     {
-        if (!isspace(*it) && !isspace(*(it + 1)) && (it+1) != _expr.end())
+        if (isdigit(*it) && isdigit(*(it + 1)) && (it+1) != _expr.end())
             throw(InvalidNumberException());
         it++;
     }
@@ -121,3 +121,16 @@ const char * RPN::RpnException::what() const throw() { return "Error"; }
 const char * RPN::NaNException::what() const throw() { return "NaN"; }
 
 const char * RPN::InvalidNumberException::what() const throw() { return "Error"; }
+
+/*----------------------------------- NOTES --------------------------------------
+
+    checks if expression is valid
+    std::string::iterator it = _expr.begin();
+    while (it != _expr.end())
+    {
+        if (!isspace(*it) && !isspace(*(it + 1)) && (it+1) != _expr.end())
+            throw(InvalidNumberException());
+        it++;
+    }
+
+*/
