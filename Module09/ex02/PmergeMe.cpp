@@ -70,7 +70,7 @@ void   PmergeMe::createPairs()
         i += 2;
     }
 
-    displayPairs();
+    
 
 }
 
@@ -82,52 +82,56 @@ void    PmergeMe::sortPairs()
             std::swap(_splitData[i].first, _splitData[i].second);
     }
     std::cout << "\n";
-    displayPairs();
+    
 }
 
-void    PmergeMe::insertionSortPairs(int size)
+void    PmergeMe::insertionSortPairs(int n)
 {
-    if (size < 1)
+    // Base case
+    if (n <= 1)
         return;
-    // else
-    // {
-    //     insertionSortPairs(size);
-    //     // insert();
-    // }
+  
+    // Sort first n-1 elements
+    insertionSortPairs( n-1 );
+  
+    // Insert last element at its correct position
+    // in sorted array.
+    int last = _splitData[n-1].second;
+    int j = n-2;
+    
+    /* Move elements of _splitData[0..i-1], that are
+    greater than key, to one position ahead
+    of their current position */
+    while (j >= 0 && _splitData[j].second > last)
+    {
+        std::swap(_splitData[j+1], _splitData[j]);
+        j--;
+    }
+    _splitData[j+1].second = last;
 }
 
 
 void    PmergeMe::sortByLargerValue()
 {
-    int n = _splitData.size() - 1;
-    int last = _splitData.size() - 1;
-
-    std::cout << "size: " << n << "\n";
+    int size = _splitData.size();
     
-    // if (_splitData[0].second > _splitData[1].second)
-        // std::swap(_splitData[0], _splitData[1]);
-    int i = n ;
-    while (n >= 0)
+    insertionSortPairs(size);
+}
+
+void    PmergeMe::createRes()
+{
+    size_t size = _splitData.size();
+    for (size_t i=0; i < size; i++)
     {
-        i = last - 1;
-        n--;
-        int j = i -1;
-        while (_splitData[i].second < _splitData[i - 1].second && i > 0)
-        {
-            std::cout << "data[" << i << "] = " << _splitData[i].second << " ";
-            std::swap(_splitData[i], _splitData[i - 1]);
-            i--;
-        }
-        std::cout << "\n";
-        displayPairs();
+        _vectorRes.push_back(_splitData[i].second);
+    }
+
+    for (size_t i=0; i< size; i++)
+    {
+        std::vector<int>::iterator lower = std::lower_bound(_vectorRes.begin(), _vectorRes.end(), _splitData[i].first);
+        _vectorRes.insert(lower, _splitData[i].first);
 
     }
-        std::cout << "\n";
-
-    displayPairs();
-    // insertionSortPairs(size);
-
-
 }
 
 void    PmergeMe::mergeInsertSort()
@@ -136,7 +140,7 @@ void    PmergeMe::mergeInsertSort()
     createPairs();
     sortPairs();
     sortByLargerValue();
-
+    createRes();
 }
 
 void    PmergeMe::fillContainers()
@@ -199,7 +203,7 @@ void    PmergeMe::displayResult()
 void    PmergeMe::displayResultVector()
 {
     std::cout << "After: ";
-    for (std::vector<int>::iterator it=_cVector.begin(); it != _cVector.end(); ++it)
+    for (std::vector<int>::iterator it=_vectorRes.begin(); it != _vectorRes.end(); ++it)
         std::cout << *it << " ";
     std::cout << "\n";
 

@@ -28,7 +28,7 @@ class PmergeMe {
         void    sortPairs();
         void    sortByLargerValue();
         void    insertionSortPairs(int size);
-
+        void    createRes();
         /* debug */
         void    displayPairs();
 
@@ -47,6 +47,7 @@ class PmergeMe {
 
         int                     _straggler;
         std::vector<std::pair<int, int> >   _splitData;
+        std::vector<int>        _vectorRes;
         PmergeMe();
 };
 
