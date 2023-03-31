@@ -2,7 +2,7 @@
  #define PMERGEME_HPP
 
 #include <iostream>
-#include <list>
+#include <deque>
 #include <vector>
 #include <ctime>
 #include <assert.h>
@@ -10,27 +10,44 @@
 class PmergeMe {
 
     public:
+        /* constructors and destructor */
         PmergeMe(char**av, int ac);
         PmergeMe(PmergeMe const &);
         PmergeMe& operator=(PmergeMe const &);
         ~PmergeMe();
 
+        /* parsing */
         void    parseInput(char **, int);
         void    findDuplicates();
         void    displayUnsortedSequence();
         void    fillContainers();
-        void    displayResult();
-        void    displayResultVector();
-
+        
+        /* merge-insert sort */
         void    mergeInsertSort();
-        void    findStraggler();
-        void    createPairs();
-        void    sortPairs();
-        void    sortByLargerValue();
-        void    insertionSortPairs(int size);
-        void    createRes();
-        /* debug */
+        void    displayResult();
+
+        /* vector */
+        void    vFindStraggler();
+        void    vCreatePairs();
+        void    vSortPairs();
+        void    vSortByLargerValue();
+        void    vInsertionSortPairs(int size);
+        void    vCreateRes();
+        void    vBinarySearch();
+
+        /* deque */
+        void    dFindStraggler();
+        void    dCreatePairs();
+        void    dSortPairs();
+        void    dSortByLargerValue();
+        void    dInsertionSortPairs(int size);
+        void    dCreateRes();
+        void    dBinarySearch();
+
+        /* utils */
         void    displayPairs();
+        void    displayResultVector();
+        void    displayResultDeque();
 
         class InputException : public std::exception {
             public:
@@ -38,16 +55,18 @@ class PmergeMe {
         };
     
     private:
-        std::string             _buf;
-        std::vector<int>        _toSort;
-        std::vector<int>        _cVector;     
-        std::list<int>          _cList;
-        float                   _timeVector;
-        long double             _timeList;
-        bool                    _isStraggler;
-        int                     _straggler;
-        std::vector<std::pair<int, int> >   _splitData;
-        std::vector<int>        _vectorRes;
+        std::string                         _buf;
+        std::vector<int>                    _cVector;
+        std::deque<int>                     _cDeque;    
+        float                               _timeVector;
+        float                               _timeDeque;
+        bool                                _isStraggler;
+        int                                 _straggler;
+        std::vector<std::pair<int, int> >   _splitVector;
+        std::deque<std::pair<int, int> >   _splitDeque;
+        std::vector<int>                    _vectorRes;
+        std::deque<int>                     _dequeRes;
+
         PmergeMe();
 };
 

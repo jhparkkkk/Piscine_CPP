@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <stack>
-
+#include <list>
 class   RPN
 {
     public:
@@ -39,7 +39,7 @@ class   RPN
         };
 
     private:
-        std::stack<int> _c;
+        std::stack<int, std::list<int> > _c;
         std::string _expr;
 
         char static const _operatorType[4];
